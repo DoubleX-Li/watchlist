@@ -1,5 +1,6 @@
 import os
 import sys
+from datetime import datetime
 
 from flask import Flask
 from flask_login import LoginManager
@@ -27,6 +28,11 @@ def inject_user():
     from watchlist.models import User
     user = User.query.first()
     return dict(user=user)
+
+
+@app.context_processor
+def inject_now():
+    return {'now': datetime.utcnow()}
 
 
 @login_manager.user_loader
