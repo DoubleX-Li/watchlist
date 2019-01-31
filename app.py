@@ -91,7 +91,7 @@ def login():
         user = User.query.first()
         if username == user.username and user.validate_password(password):
             login_user(user)
-            flash('Login Success.')
+            flash('Login success.')
             return redirect(url_for('index'))
         flash('Invalid username or password.')
         return redirect(url_for('login'))
@@ -121,21 +121,6 @@ def logout():
     logout_user()
     flash('Goodbye.')
     return redirect(url_for('index'))
-
-
-@app.route('/user/<name>')
-def user_page(name):
-    return f'User: {name}'
-
-
-@app.route('/test')
-def test_url_for():
-    print(url_for('hello'))
-    print(url_for('user_page', name='greyli'))
-    print(url_for('user_page', name='peter'))
-    print(url_for('test_url_for'))
-    print(url_for('test_url_for', num=2))
-    return 'Test page'
 
 
 @app.errorhandler(404)
